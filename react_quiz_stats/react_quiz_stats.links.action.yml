@@ -1,0 +1,5 @@
+entity.quiz_stat_entity.add_form:
+  route_name: entity.quiz_stat_entity.add_form
+  title: 'Add Quiz stat entity'
+  appears_on:
+    - entity.quiz_stat_entity.collection

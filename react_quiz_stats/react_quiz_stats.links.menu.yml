@@ -1,0 +1,14 @@
+
+# Quiz stat entity menu items definition
+entity.quiz_stat_entity.collection:
+  title: 'Quiz stat entity list'
+  route_name: entity.quiz_stat_entity.collection
+  description: 'List Quiz stat entity entities'
+  parent: system.admin_structure
+  weight: 100
+
+quiz_stat_entity.admin.structure.settings:
+  title: 'Quiz stat entity settings'
+  description: 'Configure Quiz stat entity entities'
+  route_name: quiz_stat_entity.settings
+  parent: system.admin_structure

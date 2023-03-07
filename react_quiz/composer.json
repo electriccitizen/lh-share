@@ -1,0 +1,13 @@
+{
+    "name": "react_quiz",
+    "type": "drupal-module",
+    "description": "React app to display knowledge quiz on Factsheet nodes.",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/react_quiz",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/react_quiz",
+        "source": "http://cgit.drupalcode.org/react_quiz"
+    }
+}

@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Contains react_quiz_stats.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_help().
+ */
+function react_quiz_stats_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the react_quiz_stats module.
+    case 'help.page.react_quiz_stats':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Track quiz responses for reporting.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function react_quiz_stats_theme() {
+  return [
+    'react_quiz_stats' => [
+      'render element' => 'children',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function react_quiz_stats_entity_presave(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == "quiz_stat_entity") {
+    $fields = $entity->question_rid->value;
+    $paragraph = \Drupal::entityTypeManager()
+      ->getStorage('paragraph')
+      ->loadRevision($fields);
+    $question_id = $paragraph->id();
+    $entity->set('question_id', $question_id);
+    $parent_node = $paragraph->parent_id->value;
+    if ($entity->quiz_id->value != $parent_node) {
+      $entity->set('quiz_id', $parent_node);
+    }
+  }
+};

@@ -1,0 +1,7 @@
+<?php
+function react_quiz_install() {
+
+  // Assign a fairly low weight to ensure our implementation of
+  // hook_module_implements_alter() is run among the last ones.
+  module_set_weight('react_quiz', 1000);
+}

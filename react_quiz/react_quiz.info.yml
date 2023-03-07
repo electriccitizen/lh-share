@@ -1,0 +1,5 @@
+name: 'React Quiz'
+type: module
+description: 'React app to display knowledge quiz on Factsheet nodes.'
+core_version_requirement: ^8 || ^9
+package: 'Custom'

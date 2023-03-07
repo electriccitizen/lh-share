@@ -1,0 +1,5 @@
+name: 'React Quiz Stats'
+type: module
+description: 'Track quiz responses for reporting.'
+core_version_requirement: ^8 || ^9
+package: 'Custom'

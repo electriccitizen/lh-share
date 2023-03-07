@@ -1,0 +1,20 @@
+add quiz stat entity entities:
+  title: 'Create new Quiz stat entity entities'
+
+administer quiz stat entity entities:
+  title: 'Administer Quiz stat entity entities'
+  description: 'Allow to access the administration form to configure Quiz stat entity entities.'
+  restrict access: true
+
+delete quiz stat entity entities:
+  title: 'Delete Quiz stat entity entities'
+
+edit quiz stat entity entities:
+  title: 'Edit Quiz stat entity entities'
+
+view published quiz stat entity entities:
+  title: 'View published Quiz stat entity entities'
+
+view unpublished quiz stat entity entities:
+  title: 'View unpublished Quiz stat entity entities'
+

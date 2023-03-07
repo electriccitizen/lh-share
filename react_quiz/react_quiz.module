@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * @file
+ * Contains react_quiz.module.
+ */
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use \Drupal\Core\Url;
+
+/**
+ * Implements hook_help().
+ */
+function react_quiz_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the react_quiz module.
+    case 'help.page.react_quiz':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('React app to display knowledge quiz on Factsheet nodes.') . '</p>';
+      return $output;
+
+
+    default:
+  }
+}
+
+function react_quiz_preprocess_page(&$variables)
+{
+  if (isset($variables['node'])) {
+    if ($variables['node']->bundle() == "quiz" || $variables['node']->bundle() == "fact_sheet") {
+      $variables['#attached']['drupalSettings']['quiz']['nid'] = $variables['node']->nid->value;
+      $variables['#attached']['drupalSettings']['quiz']['sid'] = session_id();
+    }
+  }
+  return $variables;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function react_quiz_theme() {
+  return [
+//    'react_quiz' => [
+//      'render element' => 'children',
+//    ],
+    'block__quizblock' => [
+      'variables' => array('title' => NULL, 'description' => 'madness', ),
+      '#theme' => 'react_quiz',
+      //'render element' => 'children',
+    ],
+
+  ];
+}
+
+function react_quiz_page_attachments(array &$page) {
+  $page['#attached']['library'][] = 'react_quiz/custom'; // modulename/libraryname
+  $page['#attached']['drupalSettings']['custom']['base_url'] = Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
+}
+
+function react_quiz_preprocess_page_title(&$variables) {
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if($node && $node->getType() == 'quiz' ) {
+    $variables['title'] = "";
+  }
+}
+
+/**
+ * Implements hook_entity_bundle_field_info_alter().
+ */
+function react_quiz_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
+  if ($bundle == "quiz") {
+    if (!empty($fields['quiz_questions'])) {
+      $fields['quiz_questions']->addConstraint('CorrectFieldLimit');
+    }
+  }
+}

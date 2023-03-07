@@ -1,0 +1,2 @@
+{{ attach_library('react_quiz/quiz') }}
+<div id="my-app-target"></div>

@@ -1,0 +1,7 @@
+quiz:
+  version: 1.x
+  js:
+    js/react/quiz/dist/app.bundle.js: { minified: true }
+    js/custom.js: {}
+  dependencies:
+    - core/drupalSettings
